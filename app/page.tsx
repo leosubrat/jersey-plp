@@ -53,13 +53,13 @@ export default function HomePage() {
               ))}
             </div>
             <p className="mt-6 max-w-2xl text-base leading-8 text-slate-600">
-              This jersey honors Barcelona's unforgettable 2011 UCL Final at Wembley, featuring Messi's iconic number 10 and a free FC Barcelona banner with today's order.
+              This jersey honors Barcelona's unforgettable 2011 UCL Final at Wembley, featuring Messi's iconic number 10 and a Free FC Barcelona Club banner with today's order.
             </p>
             <div className="mt-9 flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-8">
               <CtaButton label="Order Now" className="px-8 py-4 text-base max-sm:w-full" />
               <p className="inline-flex max-w-full items-center gap-2 rounded-md bg-barca-blue/10 px-3 py-2 text-sm font-black leading-6 text-barca-blue">
                 <Gift className="h-4 w-4 flex-none" />
-                <span>Get a FREE FC Barcelona club banner with today's order</span>
+                <span>Get a FREE FC Barcelona Club banner with today's order</span>
               </p>
             </div>
             <div className="mt-9 grid grid-cols-2 gap-3 xl:grid-cols-4">

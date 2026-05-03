@@ -1,12 +1,12 @@
 export const product = {
   brandName: "Legacy Football Store",
-  name: "2011 UCL Final FC Barcelona Messi #10 Legendary Retro Jersey",
+  name: "2011 UCL Final FC Barcelona Messi #10 Retro Jersey",
   shortName: "Messi #10 2011 UCL Final Retro Jersey",
   headline: "Own the 2011 Messi #10 UCL Final Jersey",
   subheadline:
     "Relive Barcelona's legendary Wembley victory.\nA tribute to Messi's iconic performance.\nLimited retro edition for true fans.",
   description:
-    "This jersey represents one of the greatest nights in football history, the 2011 UEFA Champions League Final at Wembley, where FC Barcelona delivered a world class performance. Worn during Lionel Messi's peak era, this jersey features the iconic number 10 on the back. It symbolizes dominance, brilliance, and a moment that defined modern football. Order today and receive a FREE FC Barcelona club banner along with your jersey.",
+    "This jersey represents one of the greatest nights in football history, the 2011 UEFA Champions League Final at Wembley, where FC Barcelona delivered a world-class performance. Worn during Lionel Messi's peak era, this jersey features the iconic number 10 on the back. It symbolizes dominance, brilliance, and a moment that defined modern football. Order today and receive a FREE FC Barcelona Club banner along with your jersey.",
   originalPrice: 4499,
   offerPrice: 3499,
   currency: "NPR",
@@ -27,7 +27,7 @@ export const product = {
     },
     {
       src: "/products/free-banner.png",
-      alt: "Free FC Barcelona club banner offer"
+      alt: "Free FC Barcelona Club banner offer"
     }
   ],
   benefits: [
