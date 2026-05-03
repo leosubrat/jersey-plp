@@ -36,9 +36,9 @@ export const product = {
     "Iconic number 10 print",
     "Premium comfortable fabric",
     "Must-have for true Barcelona fans",
-    "Free FC Barcelona banner with today's order"
+    "Free FC Barcelona Club banner with today's order"
   ],
-  badges: ["Messi #10 Print", "2011 Final Edition", "Premium Fabric", "Free Banner Included"],
+  badges: ["Messi #10 Print", "2011 Final Edition", "Premium Fabric", "Free FC Barcelona Club banner"],
   testimonials: [
     {
       quote: "As soon as I wore this, I remembered that Wembley night. Unreal feeling.",

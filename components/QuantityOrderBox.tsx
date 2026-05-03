@@ -19,7 +19,7 @@ export function QuantityOrderBox() {
             <span className="text-lg font-semibold text-slate-400 line-through">{formatMoney(product.originalPrice)}</span>
           </div>
         </div>
-        <div className="rounded-md bg-barca-gold/20 px-3.5 py-2.5 text-xs font-black leading-5 text-slate-900 shadow-sm">Free FC Barcelona banner included</div>
+        <div className="rounded-md bg-barca-gold/20 px-3.5 py-2.5 text-xs font-black leading-5 text-slate-900 shadow-sm">Free FC Barcelona Club banner included</div>
       </div>
 
       <p className="mb-5 inline-flex rounded-md bg-barca-blue/10 px-3 py-1.5 text-sm font-black text-barca-blue">Limited stock available</p>

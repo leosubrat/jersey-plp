@@ -186,7 +186,7 @@ export default function HomePage() {
         <div className="mx-auto flex w-full max-w-[1200px] flex-col justify-between gap-7 px-5 md:flex-row md:items-center">
           <div>
             <p className="mb-3 text-sm font-black uppercase tracking-wide text-barca-red">Final call</p>
-            <h2 className="max-w-3xl text-3xl font-black sm:text-4xl">Own the Messi #10 retro jersey and get the FC Barcelona banner free today.</h2>
+            <h2 className="max-w-3xl text-3xl font-black sm:text-4xl">Own the Messi #10 retro jersey and get a Free FC Barcelona Club banner today.</h2>
             <p className="mt-4 text-base font-semibold leading-7 text-slate-600">Limited stock available. Book yours today with a small prepayment.</p>
           </div>
           <CtaButton label="Order Now" className="shrink-0 max-md:w-full" />
@@ -195,11 +195,14 @@ export default function HomePage() {
 
       <div className="fixed inset-x-0 bottom-0 z-50 border-t border-slate-200 bg-white/95 px-4 py-3 shadow-[0_-12px_35px_rgba(15,23,42,0.12)] backdrop-blur md:hidden">
         <div className="mx-auto flex max-w-md items-center justify-between gap-4">
-          <div>
+          <div className="min-w-0">
             <p className="text-xs font-bold text-slate-500">Offer Price</p>
-            <p className="text-lg font-black text-slate-950">{formatMoney(product.offerPrice)}</p>
+            <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+              <span className="text-xs font-bold text-slate-400 line-through">{formatMoney(product.originalPrice)}</span>
+              <span className="text-lg font-black leading-tight text-slate-950">{formatMoney(product.offerPrice)}</span>
+            </div>
           </div>
-          <CtaButton label="Order Now" className="px-5 py-3" />
+          <CtaButton label="Order Now" className="shrink-0 px-5 py-3" />
         </div>
       </div>
     </main>
