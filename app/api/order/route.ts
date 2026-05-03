@@ -4,10 +4,20 @@ import { sendOrderEmails } from "@/lib/email";
 import { orderSchema, type PreparedOrder } from "@/lib/validation";
 
 function isAllowedOrigin(request: Request) {
-  const frontendUrl = process.env.FRONTEND_URL;
   const origin = request.headers.get("origin");
-  if (!frontendUrl || !origin) return true;
-  return origin === frontendUrl;
+  if (!origin) return true;
+
+  const configuredOrigins = [
+    process.env.FRONTEND_URL,
+    process.env.NEXT_PUBLIC_SITE_URL,
+    process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined
+  ]
+    .filter(Boolean)
+    .flatMap((value) => String(value).split(","))
+    .map((value) => value.trim().replace(/\/$/, ""));
+
+  if (!configuredOrigins.length) return true;
+  return configuredOrigins.includes(origin.replace(/\/$/, ""));
 }
 
 function corsHeaders(): Record<string, string> {
