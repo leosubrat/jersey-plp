@@ -7,6 +7,15 @@ function isAllowedOrigin(request: Request) {
   const origin = request.headers.get("origin");
   if (!origin) return true;
 
+  const requestHost = request.headers.get("x-forwarded-host") || request.headers.get("host");
+  if (requestHost) {
+    try {
+      if (new URL(origin).host === requestHost) return true;
+    } catch {
+      return false;
+    }
+  }
+
   const configuredOrigins = [
     process.env.FRONTEND_URL,
     process.env.NEXT_PUBLIC_SITE_URL,
