@@ -27,6 +27,22 @@ function generateOrderId() {
   return `LFS-${timestamp}-${random}`;
 }
 
+function formatKathmanduDateTime(date: Date) {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+    timeZone: "Asia/Kathmandu"
+  }).formatToParts(date);
+
+  const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+  return `${values.year}-${values.month}-${values.day} ${values.hour}:${values.minute}:${values.second}`;
+}
+
 function fieldErrors(error: unknown) {
   if (!error || typeof error !== "object" || !("flatten" in error)) return {};
   const flattened = (error as { flatten: () => { fieldErrors: Record<string, string[]> } }).flatten();
@@ -57,11 +73,7 @@ export async function POST(request: Request) {
     const order: PreparedOrder = {
       ...parsed.data,
       orderId: generateOrderId(),
-      dateTime: new Intl.DateTimeFormat("en-NP", {
-        dateStyle: "medium",
-        timeStyle: "medium",
-        timeZone: "Asia/Kathmandu"
-      }).format(new Date()),
+      dateTime: formatKathmanduDateTime(new Date()),
       paymentMethod: "Cash On Delivery",
       orderStatus: "New Order",
       notes: `Delivery Area: ${parsed.data.deliveryArea}; Delivery Fee: NPR ${parsed.data.deliveryFee}`

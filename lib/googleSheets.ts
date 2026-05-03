@@ -42,7 +42,7 @@ export async function appendOrderToSheet(order: PreparedOrder) {
   await sheets.spreadsheets.values.append({
     spreadsheetId: sheetId,
     range: `'${tabName}'!A:M`,
-    valueInputOption: "USER_ENTERED",
+    valueInputOption: "RAW",
     insertDataOption: "INSERT_ROWS",
     requestBody: {
       values: [
