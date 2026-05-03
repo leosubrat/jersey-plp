@@ -78,7 +78,7 @@ export const product = {
     {
       question: "Is Cash on Delivery available?",
       answer:
-        "Yes, Cash on Delivery is available after a small booking payment. You need to prepay NPR 500–1000 to confirm your order, and the remaining amount can be paid through Cash on Delivery."
+        "Yes, Cash on Delivery is available after a small booking payment. You need to prepay NPR 500\u20131000 to confirm your order, and the remaining amount can be paid through Cash on Delivery."
     },
     {
       question: "How long does delivery take?",

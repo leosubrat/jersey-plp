@@ -25,7 +25,7 @@ export function QuantityOrderBox() {
       <p className="mb-5 inline-flex rounded-md bg-barca-blue/10 px-3 py-1.5 text-sm font-black text-barca-blue">Limited stock available</p>
 
       <div className="mb-6 rounded-md border border-slate-200 bg-slate-50 p-4 text-sm leading-7 text-slate-700">
-        Book your jersey with a prepayment of NPR 500–1000. Pay the remaining amount through Cash on Delivery.
+        Book your jersey with a prepayment of {"NPR 500\u20131000"}. Pay the remaining amount through Cash on Delivery.
       </div>
 
       <div className="mb-6 flex items-center justify-between gap-4">

@@ -74,7 +74,7 @@ export default function HomePage() {
         <div className="mx-auto grid w-full max-w-[1200px] gap-10 px-5 lg:grid-cols-[0.82fr_1fr] lg:items-start lg:gap-14">
           <ProductGallery />
           <div className="w-full max-w-full">
-            <h2 className="text-3xl font-black leading-tight text-slate-950 sm:text-[2.25rem]">
+            <h2 className="text-[1.85rem] font-black leading-tight text-slate-950 sm:text-[2.15rem]">
               2011 UCL Final FC Barcelona Messi #10 Retro Jersey
             </h2>
             <p className="mt-4 text-base leading-8 text-slate-600">
@@ -82,14 +82,14 @@ export default function HomePage() {
             </p>
             <div className="mt-6 flex flex-wrap gap-2">
               {product.badges.map((badge) => (
-                <span key={badge} className="rounded-md border border-slate-200 bg-white px-3.5 py-2 text-xs font-black text-slate-700 shadow-sm">
+                <span key={badge} className="max-w-full rounded-md border border-slate-200 bg-white px-3.5 py-2 text-xs font-black leading-5 text-slate-700 shadow-sm">
                   {badge}
                 </span>
               ))}
             </div>
             <ul className="mt-7 grid gap-3">
               {product.benefits.slice(0, 5).map((benefit) => (
-                <li key={benefit} className="flex gap-3 rounded-md bg-white p-4 text-sm font-semibold text-slate-700">
+                <li key={benefit} className="flex gap-3 rounded-md bg-white p-4 text-sm font-semibold leading-6 text-slate-700">
                   <CheckCircle2 className="mt-0.5 h-5 w-5 flex-none text-barca-blue" />
                   <span>{benefit}</span>
                 </li>
@@ -110,8 +110,8 @@ export default function HomePage() {
           </div>
           <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {product.benefits.map((benefit, index) => (
-              <div key={benefit} className="flex min-h-40 flex-col rounded-lg border border-slate-200 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-soft">
-                <div className="mb-5 grid h-11 w-11 place-items-center rounded-md bg-slate-50">
+              <div key={benefit} className="flex min-h-36 flex-col rounded-lg border border-slate-200 bg-white p-5 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-soft sm:p-6">
+                <div className="mb-4 grid h-11 w-11 place-items-center rounded-md bg-slate-50 sm:mb-5">
                   <Trophy className={`h-5 w-5 ${index % 2 === 0 ? "text-barca-red" : "text-barca-blue"}`} />
                 </div>
                 <p className="text-base font-bold leading-7 text-slate-800">{benefit}</p>
@@ -132,14 +132,14 @@ export default function HomePage() {
               <h2 className="text-3xl font-black text-slate-950 sm:text-4xl">Trusted by football romantics.</h2>
               <p className="mt-3 text-base font-semibold leading-7 text-slate-600">Loved by fans who want a premium retro football memory.</p>
             </div>
-            <div className="rounded-md border border-slate-200 bg-white px-4 py-3 shadow-sm">
+            <div className="rounded-md border border-slate-200 bg-white px-4 py-3 shadow-sm max-md:w-fit">
               <p className="text-xs font-black uppercase tracking-wide text-slate-500">Today&apos;s offer</p>
               <p className="text-lg font-black text-slate-950">{formatMoney(product.offerPrice)}</p>
             </div>
           </div>
           <div className="mt-9 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {product.testimonials.map((testimonial) => (
-              <figure key={testimonial.quote} className="flex min-h-64 flex-col rounded-lg border border-slate-200 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-soft">
+              <figure key={testimonial.quote} className="flex min-h-56 flex-col rounded-lg border border-slate-200 bg-white p-5 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-soft sm:p-6 lg:min-h-64">
                 <div className="mb-4 flex gap-1 text-barca-gold" aria-label="5 star rating">
                   {Array.from({ length: 5 }).map((_, index) => (
                     <Star key={index} className="h-3.5 w-3.5 fill-current" />
