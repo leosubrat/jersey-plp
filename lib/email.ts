@@ -75,12 +75,13 @@ function businessEmail(order: PreparedOrder) {
     <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-bottom:22px;">
       ${row("Customer Name", escapeHtml(order.fullName))}
       ${row("Phone Number", escapeHtml(order.phone))}
-      ${row("Email Address", escapeHtml(order.email))}
+      ${row("Email Address", order.email ? escapeHtml(order.email) : "Not provided")}
       ${row("Exact Location", escapeHtml(order.location))}
     </table>
     <h2 style="font-size:17px;margin:0 0 10px;color:#003f87;">Product details</h2>
     <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-bottom:22px;">
       ${row("Product Name", escapeHtml(order.productName))}
+      ${row("Jersey Size", escapeHtml(order.jerseySize))}
       ${row("Quantity", order.quantity)}
       ${row("Price Per Piece", money(order.pricePerPiece))}
       ${row("Total Price", money(order.totalPrice))}
@@ -106,6 +107,7 @@ function customerEmail(order: PreparedOrder) {
       <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
         ${row("Order ID", escapeHtml(order.orderId))}
         ${row("Product", escapeHtml(order.productName))}
+        ${row("Jersey Size", escapeHtml(order.jerseySize))}
         ${row("Quantity", order.quantity)}
         ${row("Total Price", money(order.totalPrice))}
         ${row("Payment Method", "Cash On Delivery")}
@@ -140,11 +142,13 @@ export async function sendOrderEmails(order: PreparedOrder) {
     html: businessEmail(order)
   });
 
-  await transporter.sendMail({
-    from: `"${brandName}" <${fromEmail}>`,
-    replyTo: fromEmail,
-    to: order.email,
-    subject: `Your Order Has Been Received - ${brandName}`,
-    html: customerEmail(order)
-  });
+  if (order.email) {
+    await transporter.sendMail({
+      from: `"${brandName}" <${fromEmail}>`,
+      replyTo: fromEmail,
+      to: order.email,
+      subject: `Your Order Has Been Received - ${brandName}`,
+      html: customerEmail(order)
+    });
+  }
 }

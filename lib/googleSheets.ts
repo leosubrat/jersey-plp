@@ -9,6 +9,7 @@ const SHEET_COLUMNS = [
   "Email Address",
   "Exact Location",
   "Product Name",
+  "Jersey Size",
   "Quantity",
   "Price Per Piece",
   "Total Price",
@@ -41,7 +42,7 @@ export async function appendOrderToSheet(order: PreparedOrder) {
 
   await sheets.spreadsheets.values.append({
     spreadsheetId: sheetId,
-    range: `'${tabName}'!A:M`,
+    range: `'${tabName}'!A:N`,
     valueInputOption: "RAW",
     insertDataOption: "INSERT_ROWS",
     requestBody: {
@@ -54,6 +55,7 @@ export async function appendOrderToSheet(order: PreparedOrder) {
           order.email,
           order.location,
           order.productName,
+          order.jerseySize,
           order.quantity,
           order.pricePerPiece,
           order.totalPrice,

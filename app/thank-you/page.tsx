@@ -9,6 +9,7 @@ import { formatMoney, product } from "@/lib/product";
 function ThankYouContent() {
   const params = useSearchParams();
   const productName = params.get("product") || product.name;
+  const jerseySize = params.get("size");
   const quantity = Number(params.get("quantity") || 1);
   const total = Number(params.get("total") || product.offerPrice);
   const orderId = params.get("orderId");
@@ -23,6 +24,7 @@ function ThankYouContent() {
       <div className="mt-8 grid gap-3 rounded-lg bg-slate-50 p-5 text-left">
         {orderId && <Summary label="Order ID" value={orderId} />}
         <Summary label="Product ordered" value={productName} />
+        {jerseySize && <Summary label="Jersey size" value={jerseySize} />}
         <Summary label="Quantity" value={String(quantity)} />
         <Summary label="Total price" value={formatMoney(total)} />
         <Summary label="Payment method" value="Cash On Delivery" />

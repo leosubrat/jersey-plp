@@ -7,6 +7,7 @@ import { ArrowLeft, Loader2, LockKeyhole, Minus, PackageCheck, Plus } from "luci
 import { formatMoney, product } from "@/lib/product";
 
 type Errors = Record<string, string>;
+const jerseySizes = ["S", "M", "L", "XL"] as const;
 
 function readNumber(value: string | null, fallback: number) {
   const parsed = Number(value);
@@ -19,6 +20,8 @@ function CheckoutForm() {
   const initialQuantity = readNumber(params.get("quantity"), 1);
   const pricePerPiece = readNumber(params.get("price"), product.offerPrice);
   const [quantity, setQuantity] = useState(initialQuantity);
+  const [phone, setPhone] = useState("");
+  const [jerseySize, setJerseySize] = useState("");
   const [deliveryArea, setDeliveryArea] = useState<"inside-valley" | "outside-valley">("inside-valley");
   const [errors, setErrors] = useState<Errors>({});
   const [apiError, setApiError] = useState("");
@@ -31,21 +34,62 @@ function CheckoutForm() {
     setQuantity(Number.isFinite(value) && value >= 1 ? Math.floor(value) : 1);
   }
 
+  function focusFirstError(nextErrors: Errors) {
+    const firstField = Object.keys(nextErrors)[0];
+    if (!firstField) return;
+
+    requestAnimationFrame(() => {
+      const element = document.querySelector<HTMLElement>(`[name="${firstField}"]`);
+      element?.focus();
+      element?.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+  }
+
+  function validateForm(form: FormData) {
+    const nextErrors: Errors = {};
+    const fullName = String(form.get("fullName") || "").trim();
+    const email = String(form.get("email") || "").trim();
+    const location = String(form.get("location") || "").trim();
+
+    if (fullName.length < 2) nextErrors.fullName = "Please enter your full name";
+    if (!/^\d{10}$/.test(phone)) nextErrors.phone = "Please enter a valid 10-digit phone number";
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) nextErrors.email = "Please enter a valid email address";
+    if (!jerseySizes.includes(jerseySize as (typeof jerseySizes)[number])) nextErrors.jerseySize = "Please select your jersey size";
+    if (!deliveryArea) nextErrors.deliveryArea = "Please select your delivery area";
+    if (location.length < 5) nextErrors.location = "Please enter your exact delivery location";
+    if (!Number.isInteger(quantity) || quantity < 1) nextErrors.quantity = "Please select a valid quantity";
+
+    return {
+      nextErrors,
+      values: { fullName, email, location }
+    };
+  }
+
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (loading) return;
 
-    setLoading(true);
     setApiError("");
     setErrors({});
 
     const form = new FormData(event.currentTarget);
+    const { nextErrors, values } = validateForm(form);
+
+    if (Object.keys(nextErrors).length) {
+      setErrors(nextErrors);
+      focusFirstError(nextErrors);
+      return;
+    }
+
+    setLoading(true);
+
     const payload = {
-      fullName: String(form.get("fullName") || ""),
-      phone: String(form.get("phone") || ""),
-      email: String(form.get("email") || ""),
-      location: String(form.get("location") || ""),
+      fullName: values.fullName,
+      phone,
+      email: values.email,
+      location: values.location,
       productName: product.name,
+      jerseySize,
       quantity,
       pricePerPiece,
       deliveryArea,
@@ -70,7 +114,7 @@ function CheckoutForm() {
 
     sessionStorage.setItem("lastOrder", JSON.stringify({ ...payload, orderId: result.orderId }));
     router.push(
-      `/thank-you?product=${encodeURIComponent(product.name)}&quantity=${quantity}&total=${totalPrice}&orderId=${encodeURIComponent(result.orderId)}`
+      `/thank-you?product=${encodeURIComponent(product.name)}&size=${encodeURIComponent(jerseySize)}&quantity=${quantity}&total=${totalPrice}&orderId=${encodeURIComponent(result.orderId)}`
     );
   }
 
@@ -85,18 +129,49 @@ function CheckoutForm() {
 
         <div className="grid gap-5 md:grid-cols-2">
           <Field label="Full Name" name="fullName" error={errors.fullName} />
-          <Field label="Phone Number" name="phone" error={errors.phone} />
+          <Field
+            label="Phone Number"
+            name="phone"
+            value={phone}
+            onChange={(value) => setPhone(value.replace(/\D/g, "").slice(0, 10))}
+            inputMode="numeric"
+            maxLength={10}
+            error={errors.phone}
+          />
           <Field label="Email Address" name="email" type="email" error={errors.email} />
+          <label className="grid gap-2">
+            <span className="text-sm font-bold text-slate-800">Jersey Size</span>
+            <select
+              name="jerseySize"
+              value={jerseySize}
+              onChange={(event) => setJerseySize(event.target.value)}
+              className={`focus-ring h-12 rounded-md border bg-white px-3 text-slate-900 ${
+                errors.jerseySize ? "border-red-400" : "border-slate-300"
+              }`}
+            >
+              <option value="">Select jersey size</option>
+              {jerseySizes.map((size) => (
+                <option key={size} value={size}>
+                  {size}
+                </option>
+              ))}
+            </select>
+            {errors.jerseySize && <span className="text-sm font-semibold text-red-600">{errors.jerseySize}</span>}
+          </label>
           <label className="grid gap-2">
             <span className="text-sm font-bold text-slate-800">Delivery Area</span>
             <select
+              name="deliveryArea"
               value={deliveryArea}
               onChange={(event) => setDeliveryArea(event.target.value as "inside-valley" | "outside-valley")}
-              className="focus-ring h-12 rounded-md border border-slate-300 bg-white px-3 text-slate-900"
+              className={`focus-ring h-12 rounded-md border bg-white px-3 text-slate-900 ${
+                errors.deliveryArea ? "border-red-400" : "border-slate-300"
+              }`}
             >
               <option value="inside-valley">Inside Kathmandu valley - Free</option>
               <option value="outside-valley">Outside valley - NPR 150</option>
             </select>
+            {errors.deliveryArea && <span className="text-sm font-semibold text-red-600">{errors.deliveryArea}</span>}
           </label>
           <label className="grid gap-2 md:col-span-2">
             <span className="text-sm font-bold text-slate-800">Exact Location</span>
@@ -104,7 +179,9 @@ function CheckoutForm() {
               name="location"
               placeholder="Kindly share your exact location"
               rows={4}
-              className="focus-ring rounded-md border border-slate-300 px-3 py-3 text-slate-900"
+              className={`focus-ring rounded-md border px-3 py-3 text-slate-900 ${
+                errors.location ? "border-red-400" : "border-slate-300"
+              }`}
             />
             {errors.location && <span className="text-sm font-semibold text-red-600">{errors.location}</span>}
           </label>
@@ -119,9 +196,14 @@ function CheckoutForm() {
 
         <div className="grid gap-4">
           <Summary label="Product Name" value={product.name} />
+          <Summary label="Jersey Size" value={jerseySize || "Select jersey size"} />
           <label className="grid gap-2">
             <span className="text-sm font-bold text-slate-800">Quantity</span>
-            <div className="flex h-12 w-full max-w-full overflow-hidden rounded-md border border-slate-300 bg-white">
+            <div
+              className={`flex h-12 w-full max-w-full overflow-hidden rounded-md border bg-white ${
+                errors.quantity ? "border-red-400" : "border-slate-300"
+              }`}
+            >
               <button
                 type="button"
                 aria-label="Decrease quantity"
@@ -149,6 +231,7 @@ function CheckoutForm() {
                 <Plus className="h-4 w-4" />
               </button>
             </div>
+            {errors.quantity && <span className="text-sm font-semibold text-red-600">{errors.quantity}</span>}
           </label>
           <Summary label="Price Per Piece" value={formatMoney(pricePerPiece)} />
           <Summary label="Delivery Fee" value={formatMoney(deliveryFee)} />
@@ -173,11 +256,37 @@ function CheckoutForm() {
   );
 }
 
-function Field({ label, name, type = "text", error }: { label: string; name: string; type?: string; error?: string }) {
+function Field({
+  label,
+  name,
+  type = "text",
+  value,
+  onChange,
+  inputMode,
+  maxLength,
+  error
+}: {
+  label: string;
+  name: string;
+  type?: string;
+  value?: string;
+  onChange?: (value: string) => void;
+  inputMode?: "text" | "numeric" | "email" | "tel" | "url" | "search" | "none" | "decimal";
+  maxLength?: number;
+  error?: string;
+}) {
   return (
     <label className="grid gap-2">
       <span className="text-sm font-bold text-slate-800">{label}</span>
-      <input name={name} type={type} className="focus-ring h-12 rounded-md border border-slate-300 px-3 text-slate-900" />
+      <input
+        name={name}
+        type={type}
+        value={value}
+        onChange={onChange ? (event) => onChange(event.target.value) : undefined}
+        inputMode={inputMode}
+        maxLength={maxLength}
+        className={`focus-ring h-12 rounded-md border px-3 text-slate-900 ${error ? "border-red-400" : "border-slate-300"}`}
+      />
       {error && <span className="text-sm font-semibold text-red-600">{error}</span>}
     </label>
   );
