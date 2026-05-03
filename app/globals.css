@@ -8,11 +8,15 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   background: #ffffff;
   color: #111827;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
 }
 
 button,
@@ -24,4 +28,13 @@ textarea {
 
 .focus-ring {
   @apply focus:outline-none focus:ring-2 focus:ring-barca-blue focus:ring-offset-2;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

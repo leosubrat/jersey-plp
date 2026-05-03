@@ -15,7 +15,7 @@ export function CtaButton({ quantity = 1, label = "Order Now", className = "" }:
   return (
     <Link
       href={href}
-      className={`focus-ring inline-flex items-center justify-center gap-2 rounded-md bg-barca-red px-5 py-3 text-sm font-bold text-white shadow-soft transition hover:bg-[#870038] ${className}`}
+      className={`focus-ring inline-flex items-center justify-center gap-2 rounded-md bg-barca-red px-6 py-3.5 text-sm font-black text-white shadow-soft transition duration-200 hover:-translate-y-0.5 hover:bg-[#870038] ${className}`}
     >
       <ShoppingBag className="h-4 w-4" />
       {label}

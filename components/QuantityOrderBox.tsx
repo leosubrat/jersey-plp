@@ -10,25 +10,26 @@ export function QuantityOrderBox() {
   const total = quantity * product.offerPrice;
 
   return (
-    <div className="rounded-lg border border-slate-200 bg-white p-5 shadow-soft">
-      <div className="mb-4 flex items-end justify-between gap-4">
+    <div className="rounded-lg border border-slate-200 bg-white p-6 shadow-soft md:p-7">
+      <div className="mb-5 flex items-start justify-between gap-4 max-sm:flex-col">
         <div>
-          <p className="text-sm font-semibold text-slate-500">Offer price</p>
+          <p className="text-sm font-bold text-slate-500">Offer Price:</p>
           <div className="flex flex-wrap items-baseline gap-3">
-            <span className="text-3xl font-black text-barca-red">{formatMoney(product.offerPrice)}</span>
+            <span className="text-4xl font-black leading-none text-barca-red">{formatMoney(product.offerPrice)}</span>
             <span className="text-lg font-semibold text-slate-400 line-through">{formatMoney(product.originalPrice)}</span>
           </div>
+          <p className="mt-3 inline-flex rounded-md bg-barca-blue/10 px-3 py-1.5 text-sm font-black text-barca-blue">Limited stock available</p>
         </div>
-        <div className="rounded-md bg-barca-gold/20 px-3 py-2 text-sm font-bold text-slate-900">Free banner</div>
+        <div className="rounded-md bg-barca-gold/20 px-3 py-2 text-xs font-black text-slate-900 shadow-sm">Free FC Barcelona banner included</div>
       </div>
 
-      <div className="mb-4 rounded-md bg-slate-50 p-4 text-sm text-slate-700">
-        Free delivery inside Kathmandu valley. Outside valley delivery fee is NPR 150 and can be selected at checkout.
+      <div className="mb-5 rounded-md border border-slate-200 bg-slate-50 p-4 text-sm leading-7 text-slate-700">
+        Book your jersey with a prepayment of NPR 500–1000. Pay the remaining amount through Cash on Delivery.
       </div>
 
-      <div className="mb-5 flex items-center justify-between gap-4">
+      <div className="mb-6 flex items-center justify-between gap-4">
         <span className="font-bold text-slate-900">Quantity</span>
-        <div className="grid grid-cols-[40px_56px_40px] overflow-hidden rounded-md border border-slate-200">
+        <div className="grid h-10 grid-cols-[42px_58px_42px] overflow-hidden rounded-md border border-slate-200">
           <button
             type="button"
             aria-label="Decrease quantity"
@@ -49,16 +50,12 @@ export function QuantityOrderBox() {
         </div>
       </div>
 
-      <div className="mb-5 flex items-center justify-between border-t border-slate-200 pt-4">
+      <div className="mb-6 flex items-center justify-between border-t border-slate-200 pt-5">
         <span className="text-sm font-semibold text-slate-500">Product total</span>
         <span className="text-2xl font-black text-slate-950">{formatMoney(total)}</span>
       </div>
 
-      <div className="grid gap-3 sm:grid-cols-3">
-        <CtaButton quantity={quantity} label="Purchase Now" className="sm:col-span-1" />
-        <CtaButton quantity={quantity} label="Order Now" className="bg-barca-blue hover:bg-[#00336d] sm:col-span-1" />
-        <CtaButton quantity={quantity} label="Buy Now" className="bg-slate-950 hover:bg-slate-800 sm:col-span-1" />
-      </div>
+      <CtaButton quantity={quantity} label="Order Now" className="w-full bg-barca-blue py-4 text-base hover:bg-[#00336d]" />
     </div>
   );
 }
