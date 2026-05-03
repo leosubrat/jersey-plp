@@ -10,20 +10,21 @@ export function QuantityOrderBox() {
   const total = quantity * product.offerPrice;
 
   return (
-    <div className="rounded-lg border border-slate-200 bg-white p-6 shadow-soft md:p-7">
-      <div className="mb-5 flex items-start justify-between gap-4 max-sm:flex-col">
+    <div className="rounded-lg border border-slate-200 bg-white p-6 shadow-soft md:p-8">
+      <div className="mb-5 flex items-start justify-between gap-5 max-sm:flex-col">
         <div>
           <p className="text-sm font-bold text-slate-500">Offer Price:</p>
           <div className="flex flex-wrap items-baseline gap-3">
             <span className="text-4xl font-black leading-none text-barca-red">{formatMoney(product.offerPrice)}</span>
             <span className="text-lg font-semibold text-slate-400 line-through">{formatMoney(product.originalPrice)}</span>
           </div>
-          <p className="mt-3 inline-flex rounded-md bg-barca-blue/10 px-3 py-1.5 text-sm font-black text-barca-blue">Limited stock available</p>
         </div>
-        <div className="rounded-md bg-barca-gold/20 px-3 py-2 text-xs font-black text-slate-900 shadow-sm">Free FC Barcelona banner included</div>
+        <div className="rounded-md bg-barca-gold/20 px-3.5 py-2.5 text-xs font-black leading-5 text-slate-900 shadow-sm">Free FC Barcelona banner included</div>
       </div>
 
-      <div className="mb-5 rounded-md border border-slate-200 bg-slate-50 p-4 text-sm leading-7 text-slate-700">
+      <p className="mb-5 inline-flex rounded-md bg-barca-blue/10 px-3 py-1.5 text-sm font-black text-barca-blue">Limited stock available</p>
+
+      <div className="mb-6 rounded-md border border-slate-200 bg-slate-50 p-4 text-sm leading-7 text-slate-700">
         Book your jersey with a prepayment of NPR 500–1000. Pay the remaining amount through Cash on Delivery.
       </div>
 

@@ -71,15 +71,16 @@ export default function HomePage() {
       </section>
 
       <section className="bg-slate-50 py-12 md:py-16 lg:py-20" id="showcase">
-        <div className="mx-auto grid w-full max-w-[1200px] gap-10 px-5 lg:grid-cols-[0.86fr_1fr] lg:items-start lg:gap-14">
+        <div className="mx-auto grid w-full max-w-[1200px] gap-10 px-5 lg:grid-cols-[0.82fr_1fr] lg:items-start lg:gap-14">
           <ProductGallery />
-          <div>
-            <p className="mb-3 text-sm font-black uppercase tracking-wide text-barca-red">Product showcase</p>
-            <h2 className="text-3xl font-black leading-tight text-slate-950 sm:text-[2.35rem]">{product.shortName}</h2>
+          <div className="w-full max-w-full">
+            <h2 className="text-3xl font-black leading-tight text-slate-950 sm:text-[2.25rem]">
+              2011 UCL Final FC Barcelona Messi #10 Retro Jersey
+            </h2>
             <p className="mt-4 text-base leading-8 text-slate-600">
               Built for fans who remember the rhythm, the dominance, and the number 10 that made Wembley feel timeless.
             </p>
-            <div className="mt-5 flex flex-wrap gap-2">
+            <div className="mt-6 flex flex-wrap gap-2">
               {product.badges.map((badge) => (
                 <span key={badge} className="rounded-md border border-slate-200 bg-white px-3.5 py-2 text-xs font-black text-slate-700 shadow-sm">
                   {badge}
