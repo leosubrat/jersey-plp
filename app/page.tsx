@@ -191,7 +191,7 @@ export default function HomePage() {
           <div>
             <p className="mb-3 text-sm font-black uppercase tracking-wide text-barca-red">Final call</p>
             <h2 className="max-w-3xl text-3xl font-black sm:text-4xl">Own the Messi #10 retro jersey and get a Free FC Barcelona Club banner today.</h2>
-            <p className="mt-4 text-base font-semibold leading-7 text-slate-600">Limited stock available. Book yours today with a small prepayment.</p>
+            <p className="mt-4 text-base font-semibold leading-7 text-slate-600">Limited stock available. Order today and pay through full Cash on Delivery.</p>
           </div>
           <CtaButton label="Order Now" className="shrink-0 max-md:w-full" />
         </div>
