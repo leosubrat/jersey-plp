@@ -30,13 +30,20 @@ export default function HomePage() {
 
       <section className="relative overflow-hidden bg-white">
         <div className="mx-auto grid w-full max-w-[1200px] gap-10 px-5 py-12 md:grid-cols-[1.06fr_0.78fr] md:items-center md:py-16 lg:gap-14 lg:py-20">
-          <div>
+          <div className="md:col-start-1 md:row-start-1">
             <p className="mb-4 inline-flex rounded-md bg-slate-100 px-3 py-2 text-sm font-bold text-barca-blue">
               2011 Wembley Final Edition
             </p>
             <h1 className="max-w-3xl text-[2rem] font-black leading-[1.1] text-slate-950 sm:text-[2.75rem] lg:text-[3.05rem]">
               2011 UCL Final FC Barcelona Messi #10 Retro Jersey
             </h1>
+          </div>
+
+          <div className="relative w-full max-w-full justify-self-center md:col-start-2 md:row-span-2 md:row-start-1 md:justify-self-end lg:max-w-[470px]">
+            <HeroImageSlider />
+          </div>
+
+          <div className="md:col-start-1 md:row-start-2">
             <div className="mt-6 grid max-w-xl gap-3">
               {heroBenefits.map((benefit) => (
                 <div key={benefit} className="flex items-start gap-3 rounded-md bg-slate-50 px-3.5 py-3 text-base font-bold leading-6 text-slate-800">
@@ -55,7 +62,7 @@ export default function HomePage() {
                 <span>Get a FREE FC Barcelona club banner with today's order</span>
               </p>
             </div>
-            <div className="mt-9 grid grid-cols-2 gap-3 lg:grid-cols-4">
+            <div className="mt-9 grid grid-cols-2 gap-3 xl:grid-cols-4">
               {trustItems.map(({ icon: Icon, label }) => (
                 <div key={label} className="flex min-h-16 items-center gap-2 rounded-md border border-slate-200 bg-white px-3 py-3 text-sm font-semibold leading-5 text-slate-700 shadow-sm">
                   <Icon className="h-4 w-4 flex-none text-barca-red" />
@@ -63,9 +70,6 @@ export default function HomePage() {
                 </div>
               ))}
             </div>
-          </div>
-          <div className="relative w-full max-w-full justify-self-center md:justify-self-end lg:max-w-[470px]">
-            <HeroImageSlider />
           </div>
         </div>
       </section>

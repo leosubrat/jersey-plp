@@ -3,7 +3,7 @@
 import { Suspense, useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ArrowLeft, Loader2, LockKeyhole, PackageCheck } from "lucide-react";
+import { ArrowLeft, Loader2, LockKeyhole, Minus, PackageCheck, Plus } from "lucide-react";
 import { formatMoney, product } from "@/lib/product";
 
 type Errors = Record<string, string>;
@@ -26,6 +26,10 @@ function CheckoutForm() {
 
   const deliveryFee = deliveryArea === "outside-valley" ? product.deliveryOutside : product.deliveryInside;
   const totalPrice = useMemo(() => quantity * pricePerPiece + deliveryFee, [quantity, pricePerPiece, deliveryFee]);
+
+  function updateQuantity(value: number) {
+    setQuantity(Number.isFinite(value) && value >= 1 ? Math.floor(value) : 1);
+  }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -117,13 +121,34 @@ function CheckoutForm() {
           <Summary label="Product Name" value={product.name} />
           <label className="grid gap-2">
             <span className="text-sm font-bold text-slate-800">Quantity</span>
-            <input
-              type="number"
-              min={1}
-              value={quantity}
-              onChange={(event) => setQuantity(Math.max(1, Number(event.target.value) || 1))}
-              className="focus-ring h-12 rounded-md border border-slate-300 px-3 font-bold text-slate-900"
-            />
+            <div className="grid h-12 grid-cols-[48px_1fr_48px] overflow-hidden rounded-md border border-slate-300 bg-white">
+              <button
+                type="button"
+                aria-label="Decrease quantity"
+                disabled={quantity <= 1}
+                onClick={() => updateQuantity(quantity - 1)}
+                className="focus-ring grid place-items-center text-slate-700 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:text-slate-300 disabled:hover:bg-white"
+              >
+                <Minus className="h-4 w-4" />
+              </button>
+              <input
+                type="number"
+                min={1}
+                value={quantity}
+                inputMode="numeric"
+                onChange={(event) => updateQuantity(Number(event.target.value))}
+                onBlur={(event) => updateQuantity(Number(event.target.value))}
+                className="focus-ring h-full border-x border-slate-300 px-3 text-center font-bold text-slate-900"
+              />
+              <button
+                type="button"
+                aria-label="Increase quantity"
+                onClick={() => updateQuantity(quantity + 1)}
+                className="focus-ring grid place-items-center text-slate-700 transition hover:bg-slate-50"
+              >
+                <Plus className="h-4 w-4" />
+              </button>
+            </div>
           </label>
           <Summary label="Price Per Piece" value={formatMoney(pricePerPiece)} />
           <Summary label="Delivery Fee" value={formatMoney(deliveryFee)} />
