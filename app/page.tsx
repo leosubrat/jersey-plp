@@ -29,13 +29,14 @@ export default function HomePage() {
       </header>
 
       <section className="relative overflow-hidden bg-white">
-        <div className="mx-auto grid w-full max-w-[1200px] gap-10 px-5 py-12 md:grid-cols-[1.06fr_0.78fr] md:items-center md:py-16 lg:gap-14 lg:py-20">
+        <div className="mx-auto grid w-full max-w-[1200px] gap-8 px-5 pb-12 pt-8 md:grid-cols-[1.06fr_0.78fr] md:items-center md:gap-10 md:pb-16 md:pt-12 lg:gap-14 lg:pb-20 lg:pt-16">
           <div className="md:col-start-1 md:row-start-1">
             <p className="mb-4 inline-flex rounded-md bg-slate-100 px-3 py-2 text-sm font-bold text-barca-blue">
               2011 Wembley Final Edition
             </p>
-            <h1 className="max-w-3xl text-[2rem] font-black leading-[1.1] text-slate-950 sm:text-[2.75rem] lg:text-[3.05rem]">
-              2011 UCL Final FC Barcelona Messi #10 Retro Jersey
+            <h1 className="max-w-3xl text-[1.5rem] font-black leading-[1.1] text-slate-950 min-[390px]:text-[1.7rem] sm:text-[2.08rem] lg:text-[2.62rem] xl:text-[2.86rem]">
+              <span className="block whitespace-nowrap">2011 UCL Final FC Barcelona</span>
+              <span className="block whitespace-nowrap">Messi #10 Retro Jersey</span>
             </h1>
           </div>
 
@@ -44,7 +45,7 @@ export default function HomePage() {
           </div>
 
           <div className="md:col-start-1 md:row-start-2">
-            <div className="mt-6 grid max-w-xl gap-3">
+            <div className="mt-4 grid max-w-xl gap-3 md:mt-5">
               {heroBenefits.map((benefit) => (
                 <div key={benefit} className="flex items-start gap-3 rounded-md bg-slate-50 px-3.5 py-3 text-base font-bold leading-6 text-slate-800">
                   <CheckCircle2 className="mt-0.5 h-5 w-5 flex-none text-barca-blue" />
@@ -78,8 +79,9 @@ export default function HomePage() {
         <div className="mx-auto grid w-full max-w-[1200px] gap-10 px-5 lg:grid-cols-[0.82fr_1fr] lg:items-start lg:gap-14">
           <ProductGallery />
           <div className="w-full max-w-full">
-            <h2 className="text-[1.85rem] font-black leading-tight text-slate-950 sm:text-[2.15rem]">
-              2011 UCL Final FC Barcelona Messi #10 Retro Jersey
+            <h2 className="text-[1.5rem] font-black leading-tight text-slate-950 min-[390px]:text-[1.7rem] sm:text-[2rem] lg:text-[2.18rem]">
+              <span className="block whitespace-nowrap">2011 UCL Final FC Barcelona</span>
+              <span className="block whitespace-nowrap">Messi #10 Retro Jersey</span>
             </h2>
             <p className="mt-4 text-base leading-8 text-slate-600">
               Built for fans who remember the rhythm, the dominance, and the number 10 that made Wembley feel timeless.
