@@ -121,13 +121,13 @@ function CheckoutForm() {
           <Summary label="Product Name" value={product.name} />
           <label className="grid gap-2">
             <span className="text-sm font-bold text-slate-800">Quantity</span>
-            <div className="grid h-12 grid-cols-[48px_1fr_48px] overflow-hidden rounded-md border border-slate-300 bg-white">
+            <div className="flex h-12 w-full max-w-full overflow-hidden rounded-md border border-slate-300 bg-white">
               <button
                 type="button"
                 aria-label="Decrease quantity"
                 disabled={quantity <= 1}
                 onClick={() => updateQuantity(quantity - 1)}
-                className="focus-ring grid place-items-center text-slate-700 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:text-slate-300 disabled:hover:bg-white"
+                className="focus-ring grid w-12 shrink-0 place-items-center text-slate-700 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:text-slate-300 disabled:hover:bg-white"
               >
                 <Minus className="h-4 w-4" />
               </button>
@@ -138,13 +138,13 @@ function CheckoutForm() {
                 inputMode="numeric"
                 onChange={(event) => updateQuantity(Number(event.target.value))}
                 onBlur={(event) => updateQuantity(Number(event.target.value))}
-                className="focus-ring h-full border-x border-slate-300 px-3 text-center font-bold text-slate-900"
+                className="focus-ring h-full min-w-0 flex-1 border-x border-slate-300 px-2 text-center font-bold text-slate-900 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
               />
               <button
                 type="button"
                 aria-label="Increase quantity"
                 onClick={() => updateQuantity(quantity + 1)}
-                className="focus-ring grid place-items-center text-slate-700 transition hover:bg-slate-50"
+                className="focus-ring grid w-12 shrink-0 place-items-center text-slate-700 transition hover:bg-slate-50"
               >
                 <Plus className="h-4 w-4" />
               </button>
